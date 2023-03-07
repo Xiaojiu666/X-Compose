@@ -1,5 +1,6 @@
 package com.x.custom.edittext
 
+import android.annotation.SuppressLint
 import android.widget.EditText
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -16,27 +17,46 @@ import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.stateIn
 
 @Composable
-fun EditTextView(value: TextFieldValue, onValueChange: (TextFieldValue) -> Unit){
-    Box(modifier = Modifier.background(color = Color.Yellow).fillMaxSize()){
+fun BasicTextFieldView(value: TextFieldValue, onValueChange: (TextFieldValue) -> Unit) {
+    Box(
+        modifier = Modifier
+            .background(color = Color.Yellow)
+            .fillMaxSize()
+    ) {
         BasicTextField(value = value,
-            onValueChange = onValueChange ,
+            onValueChange = onValueChange,
             cursorBrush = SolidColor(Color.Gray),
-            modifier =Modifier.background(color = Color.Red),
+            modifier = Modifier.background(color = Color.Red),
             decorationBox = {
                 it()
-            },)
+            })
     }
 }
 
+
+@Composable
+fun EditTextView(editTextUiState: EditTextUiState) {
+    BasicTextFieldView(editTextUiState.textFieldValue){
+        editTextUiState.onValueChange =  it
+    }
+}
+
+@SuppressLint("StateFlowValueCalledInComposition")
 @Preview
 @Composable
-fun preEditTextView(){
-    var text by remember { mutableStateOf(TextFieldValue("请输入内容")) }
-    EditTextView(text){
-        text = it
-    }
+fun preEditTextView() {
+
+    val editTextUiState = MutableStateFlow(EditTextUiState(TextFieldValue(), TextFieldValue()))
+
+    EditTextView(editTextUiState.value)
 }
 
 // https://juejin.cn/post/6998038393003180046
+// https://developer.android.com/jetpack/compose/text?hl=zh-cn

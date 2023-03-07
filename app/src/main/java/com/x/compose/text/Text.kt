@@ -24,15 +24,28 @@ import androidx.compose.ui.unit.sp
 
 
 @Composable
-fun baseText(content:String) {
+fun baseText(content: String) {
     Text(
-        text = content,
+        text = buildAnnotatedString {
+            append(content)
+            addStyle(
+                SpanStyle(
+                    color = Color.Red
+                ),
+                1, 3
+            )
+        },
         //控制Text外部边框的一些属性，eg: Size Background
-        modifier = Modifier.background(Color.White).padding(10.dp)
+        modifier = Modifier
+            .background(Color.White)
+            .padding(10.dp)
             .border(
                 BorderStroke(
                     1.dp,
-                    brush = Brush.horizontalGradient(listOf(Color.Yellow, Color.Green, Color.Blue), tileMode = TileMode.Clamp)
+                    brush = Brush.horizontalGradient(
+                        listOf(Color.Yellow, Color.Green, Color.Blue),
+                        tileMode = TileMode.Clamp
+                    )
                 )
             ),
         color = Color.Black
@@ -40,13 +53,15 @@ fun baseText(content:String) {
 }
 
 @Composable
-fun baseTextFieldValue(content:String) {
+fun baseTextFieldValue(content: String) {
     Text(
         text = buildAnnotatedString {
             append(content)
-            withStyle( style = SpanStyle(
-                fontSize = 24.sp, color = Color.Blue)
-            ){
+            withStyle(
+                style = SpanStyle(
+                    fontSize = 24.sp, color = Color.Blue
+                )
+            ) {
                 append("这是一段高亮的代码")
             }
         }
@@ -54,38 +69,41 @@ fun baseTextFieldValue(content:String) {
 }
 
 
-
 @Composable
 fun baseTextFiled() {
     TextFieldValue
-        val content = remember{ mutableStateOf("请输入内容") }
-        //文本字段
-        TextField(
-            value = content.value,
-            onValueChange = { it->
-                content.value = it
-            }
-        )
+    val content = remember { mutableStateOf("请输入内容") }
+    //文本字段
+    TextField(
+        value = content.value,
+        onValueChange = { it ->
+            content.value = it
+        }
+    )
 }
 
 @Composable
 fun baseBasicTextFiled() {
-    val content = remember{ mutableStateOf(TextFieldValue()) }
+    val content = remember { mutableStateOf(TextFieldValue()) }
     //文本字段
     BasicTextField(
         value = TextFieldValue(),
-        onValueChange = { it->
+        onValueChange = { it ->
             content.value = it
         }
     )
 }
 
 
-
 @Preview
 @Composable
 fun preBasicText() {
-    Column(modifier = Modifier.background(Color.White).fillMaxSize().padding(20.dp)) {
+    Column(
+        modifier = Modifier
+            .background(Color.White)
+            .fillMaxSize()
+            .padding(20.dp)
+    ) {
         baseText("基础text")
         Spacer(Modifier.background(Color.White))
         baseTextFieldValue("基础text-buildAnnotatedString")
