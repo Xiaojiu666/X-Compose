@@ -11,8 +11,7 @@ interface UiStateWrapper {
 }
 
 class EditTextUiState(
-    val textFieldValue: TextFieldValue,
-    var onValueChange: TextFieldValue,
+    var textFieldValue: TextFieldValue,
 ) : UiStateWrapper
 
 

@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -29,7 +30,6 @@ fun <T> GridListView(data: List<T>, itemContent: @Composable (item: T) -> Unit) 
     var dataLists by remember { mutableStateOf(data) }
     ConstraintLayout(
         modifier = Modifier
-            .systemBarsPadding()
             .fillMaxWidth()
     ) {
         var (text, list) = createRefs()
@@ -37,15 +37,21 @@ fun <T> GridListView(data: List<T>, itemContent: @Composable (item: T) -> Unit) 
             .constrainAs(text) {
                 start.linkTo(parent.start)
                 end.linkTo(parent.end)
-                top.linkTo(parent.top, 100.dp)
+                top.linkTo(parent.top, 0.dp)
             })
         Box(modifier = Modifier
             .constrainAs(list) {
                 start.linkTo(parent.start)
                 end.linkTo(parent.end)
                 top.linkTo(text.bottom, 10.dp)
+                bottom.linkTo(parent.bottom)
             }
             .fillMaxWidth()) {
+            LazyColumn(modifier = Modifier.fillMaxSize()){
+                items(dataLists){
+
+                }
+            }
 //        LazyVerticalGrid(columns = GridCells.Fixed(4)){
 //            items(dataLists)  {
 //                Box(modifier = Modifier.background(color = Color.Blue).fillMaxWidth(0.5f).fillMaxHeight(0.5f)){

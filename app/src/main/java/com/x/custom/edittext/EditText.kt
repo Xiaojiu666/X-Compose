@@ -39,23 +39,25 @@ fun BasicTextFieldView(value: TextFieldValue, onValueChange: (TextFieldValue) ->
             })
     }
 }
-
-
+@Preview
 @Composable
-fun EditTextView(editTextUiState: EditTextUiState) {
-    BasicTextFieldView(editTextUiState.textFieldValue){
-        editTextUiState.onValueChange =  it
+fun EditTextView() {
+    var editTextUiState by remember {
+        mutableStateOf(EditTextUiState(TextFieldValue()))
+    }
+    BasicTextFieldView(editTextUiState.textFieldValue) {
+        editTextUiState = EditTextUiState(it)
     }
 }
 
 @SuppressLint("StateFlowValueCalledInComposition")
-@Preview
+
 @Composable
 fun preEditTextView() {
 
-    val editTextUiState = MutableStateFlow(EditTextUiState(TextFieldValue(), TextFieldValue()))
 
-    EditTextView(editTextUiState.value)
+
+    EditTextView()
 }
 
 // https://juejin.cn/post/6998038393003180046
