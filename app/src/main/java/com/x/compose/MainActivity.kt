@@ -1,9 +1,13 @@
 package com.x.compose
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.material.Button
+import androidx.compose.runtime.Composable
+import com.x.TestView
 import com.x.compose.text.preBasicText
 import com.x.custom.EditTextViewModel
 import com.x.custom.edittext.EditTextView
@@ -20,7 +24,8 @@ class MainActivity : AppCompatActivity() {
         setContent {
 //            preBasicText(vm)
 //            UserInfoView(vm)
-            EditTextView(editTextViewModel)
+//            EditTextView(editTextViewModel)
+            TestView()
         }
     }
 
