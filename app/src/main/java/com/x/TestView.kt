@@ -30,6 +30,7 @@ import com.x.compose.text.baseText
 fun TestView() {
     var visible by remember { mutableStateOf(true) }
     var padding by remember { mutableStateOf(0.dp) }
+    //https://developer.aliyun.com/article/1123887
     val size by animateDpAsState(
         targetValue =if (visible) 0.dp else 100.dp,
         animationSpec = tween(durationMillis = 1000))
