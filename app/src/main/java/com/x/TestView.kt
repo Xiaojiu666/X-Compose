@@ -1,10 +1,10 @@
 package com.x
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.slideIn
-import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOut
+import androidx.compose.animation.*
+import androidx.compose.animation.core.TargetBasedAnimation
+import androidx.compose.animation.core.VectorConverter
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,11 +14,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -33,7 +29,28 @@ import com.x.compose.text.baseText
 @Composable
 fun TestView() {
     var visible by remember { mutableStateOf(true) }
+    var padding by remember { mutableStateOf(0.dp) }
+    val size by animateDpAsState(
+        targetValue =if (visible) 0.dp else 100.dp,
+        animationSpec = tween(durationMillis = 1000))
+
     val density = LocalDensity.current
+    val anim = remember {
+        TargetBasedAnimation(
+            animationSpec = tween(200),
+            typeConverter = Float.VectorConverter,
+            initialValue = 0f,
+            targetValue = 100f
+        )
+    }
+    LaunchedEffect(anim) {
+        val startTime = withFrameNanos { it }
+        val playTime = withFrameNanos { it } - startTime
+        val animationValue = anim.getValueFromNanos(playTime)
+        println("startTime : $startTime, playTime : $playTime , animationValue : $animationValue")
+        padding = animationValue.dp
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -53,7 +70,7 @@ fun TestView() {
                 )
                 .background(Color.White),
         ) {
-            Text(text = "移动文案")
+            Text(modifier =Modifier.padding(top = size), text = "移动文案")
         }
 //        AnimatedVisibility(
 //            modifier = Modifier

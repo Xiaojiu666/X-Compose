@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.core.view.WindowCompat
+import com.x.TestView
 import com.x.compose.text.preBasicText
 import com.x.custom.EditTextViewModel
 import com.x.custom.edittext.EditTextView
@@ -23,10 +24,11 @@ class MainActivity : ComponentActivity() {
         setContent {
 //            preBasicText()
 //            UserInfoView(vm)
-            EditTextView()
+//            EditTextView()
+            TestView()
         }
-        KeyboardHandler(findViewById(android.R.id.content)).handleKeyboard()
-        WindowCompat.setDecorFitsSystemWindows(window, false)
+//        KeyboardHandler(findViewById(android.R.id.content)).handleKeyboard()
+//        WindowCompat.setDecorFitsSystemWindows(window, false)
     }
 
 }
