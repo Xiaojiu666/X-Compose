@@ -1,36 +1,26 @@
-package com.x.compose
+package com.x.compose.mian.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.compose.NavHost
-import com.x.compose.mian.ui.HomeItemView
-import com.x.compose.mian.ui.HomeToolbar
+import com.x.compose.HomeNavigateItem
+import com.x.compose.R
+import com.x.compose.mian.ui.base.BaseScaffoldPage
 
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomePageView(
-    homeItem: List<HomeNavigateItem>,
-    onItemClick: (HomeNavigateItem) -> Unit
+    homeItem: List<HomeNavigateItem>, onItemClick: (HomeNavigateItem) -> Unit
 ) {
-    BaseScaffoldPage(
-        onBackClick = {},
-        title = stringResource(id = R.string.app_name)
-    ) {
+    BaseScaffoldPage(toolbar = { BaseTitleToolbar(title = stringResource(id = R.string.app_name)) }) {
         Box(
             modifier = Modifier
                 .background(Color.DarkGray)
@@ -50,38 +40,4 @@ fun HomePageView(
     }
 }
 
-
-@Composable
-fun BaseScaffoldBackPage(
-    title: String,
-    onBackClick: () -> Unit,
-    content: @Composable (PaddingValues) -> Unit
-) {
-    BaseScaffoldPage(
-        title = title,
-        onBackClick = onBackClick,
-        toolbar = {},
-        content = content
-    )
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun BaseScaffoldPage(
-    title: String,
-    onBackClick: () -> Unit,
-    toolbar: @Composable () -> Unit = {
-        HomeToolbar()
-    },
-    content: @Composable (PaddingValues) -> Unit
-) {
-    Scaffold(
-        modifier = Modifier
-            .navigationBarsPadding()
-            .fillMaxSize(),
-        topBar = toolbar
-    ) {
-        content(it)
-    }
-}
 

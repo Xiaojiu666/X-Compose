@@ -2,6 +2,7 @@ package com.x.compose.mian.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -9,7 +10,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -20,7 +20,11 @@ import com.x.compose.mian.theme.baseWhite
 val TOOLBAR_HEIGHT = 56.dp
 
 @Composable
-fun HomeToolbar() {
+fun BaseToolbar(
+    leftView: @Composable BoxScope.() -> Unit = {},
+    centerView: @Composable BoxScope.() -> Unit = {},
+    rightView: @Composable BoxScope.() -> Unit = {}
+) {
     Box(
         Modifier
             .background(Color.Black)
@@ -34,64 +38,79 @@ fun HomeToolbar() {
                 .align(Alignment.Center)
                 .fillMaxHeight()
         ) {
-            Text(
-                modifier = Modifier.align(Alignment.Center),
-                text = stringResource(com.x.compose.R.string.app_name),
-                textAlign = TextAlign.Center,
-                style = subtitle2Bold,
-                color = baseWhite()
-            )
+            centerView(this)
+        }
+
+        Box(
+            Modifier.align(Alignment.CenterStart)
+        ) {
+            leftView(this)
+        }
+
+        Box(
+            Modifier.align(Alignment.CenterEnd)
+        ) {
+            rightView(this)
         }
     }
 }
 
 @Composable
-fun BackToolbar() {
-    Box(
-        Modifier
-            .background(Color.Black)
-            .statusBarsPadding()
-            .padding(11.dp, 0.dp, 16.dp, 0.dp)
-            .fillMaxWidth()
-            .height(TOOLBAR_HEIGHT)
-    ) {
-        Box(
-            Modifier
-                .align(Alignment.CenterStart)
-        ) {
+fun BaseTitleToolbar(
+    title: String,
+) {
+    BaseToolbar(
+        centerView = {
+            Text(
+                modifier = Modifier.align(Alignment.Center),
+                text = title,
+                textAlign = TextAlign.Center,
+                style = subtitle2Bold,
+                color = baseWhite()
+            )
+        })
+}
+
+@Composable
+fun BaseBackToolbar(
+    title: String,
+    onBackClick: () -> Unit
+) {
+    BaseToolbar(
+        centerView = {
+            Text(
+                modifier = Modifier.align(Alignment.Center),
+                text = title,
+                textAlign = TextAlign.Center,
+                style = subtitle2Bold,
+                color = baseWhite()
+            )
+        }, leftView = {
             Image(
-                painter = painterResource(
-                    id = com.x.compose.R.drawable.ic_back
-                ),
+                modifier = Modifier
+                    .align(Alignment.Center)
+                    .clickable {
+                        onBackClick()
+                    },
+                painter = painterResource(id = com.x.compose.R.drawable.ic_back),
                 contentDescription = ""
             )
-        }
+        })
+}
 
-        Box(
-            Modifier
-                .align(Alignment.Center)
-        ) {
-            Text(
-                modifier = Modifier.align(Alignment.Center),
-                text = stringResource(com.x.compose.R.string.app_name),
-                textAlign = TextAlign.Center,
-                style = subtitle2Bold,
-                color = baseWhite()
-            )
-        }
+
+@Preview
+@Composable
+fun preBaseTitleToolbar() {
+    BaseTitleToolbar(title = "home")
+}
+
+@Preview
+@Composable
+fun preBaseBackToolbar() {
+    BaseBackToolbar(title = "home") {
+
     }
 }
 
 
-@Preview
-@Composable
-fun preHomeToolbar() {
-    HomeToolbar()
-
-}
-
-@Preview
-@Composable
-fun preBackToolbar() {
-    BackToolbar()
-}

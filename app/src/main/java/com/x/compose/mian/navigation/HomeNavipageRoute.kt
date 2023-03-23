@@ -1,9 +1,8 @@
 package com.x.compose.mian.navigation
 
-const val HOME_NAVIGATION  = "home/navigation"
+const val HOME_NAVIGATION  = "home"
 
-const val HOME_NAVIGATION_DEFAULT  = "home/navigation/default"
+const val HOME_NAVIGATION_DEFAULT  = "home/default"
 
-const val BASE_NAVIGATION_TEXT  = "base/navigation/text"
+const val BASE_NAVIGATION_TEXT  = "home/base/text"
 
-const val BASE_NAVIGATION  = "base/navigation"

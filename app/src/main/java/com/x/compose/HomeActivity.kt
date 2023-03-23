@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.IntegerRes
 import androidx.annotation.RawRes
-import com.x.compose.mian.navigation.BASE_NAVIGATION
 import com.x.compose.mian.navigation.BASE_NAVIGATION_TEXT
 import com.x.compose.mian.navigation.HomeNavigate
 
