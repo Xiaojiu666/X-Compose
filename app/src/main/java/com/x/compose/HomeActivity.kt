@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.IntegerRes
 import androidx.annotation.RawRes
-import com.x.compose.mian.navigation.BASE_NAVIGATION_TEXT
+import com.x.compose.mian.navigation.HOME_NAVIGATION_BASE
 import com.x.compose.mian.navigation.HomeNavigate
 
 class MainActivity : AppCompatActivity() {
@@ -22,15 +22,26 @@ class MainActivity : AppCompatActivity() {
 fun createHomePageNavigate(): List<HomeNavigateItem> {
     return listOf(
         HomeNavigateItem(
-            R.mipmap.ic_logo, BASE_NAVIGATION_TEXT, "基础控件",
-            "TextView、ImageView"
+            R.mipmap.ic_logo, HOME_NAVIGATION_BASE,
+            "基础控件",
+            "TextView,ImageView,EditText"
         ),
-        HomeNavigateItem(R.mipmap.ic_logo, "", "容器控件"),
-        HomeNavigateItem(R.mipmap.ic_logo, "", "动画"),
+        HomeNavigateItem(
+            R.mipmap.ic_logo,
+            HOME_NAVIGATION_BASE,
+            "容器控件",
+            "Column、Row、Box、List"
+        ),
+        HomeNavigateItem(
+            R.mipmap.ic_logo,
+            HOME_NAVIGATION_BASE,
+            "动画效果",
+            "TextView、ImageView、EditText"
+        ),
     )
 }
 
 
 data class HomeNavigateItem(
-    val icon: Int, val navigate: String, val name: String, val desc: String = ""
+    val icon: Int, val navigate: String, val name: String, val desc: String
 )

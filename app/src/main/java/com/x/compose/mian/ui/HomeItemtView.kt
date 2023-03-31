@@ -7,8 +7,11 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -20,8 +23,12 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.x.compose.HomeNavigateItem
 import com.x.compose.R
 
@@ -30,7 +37,8 @@ import com.x.compose.R
 fun HomeItemView(homeNavigateItem: HomeNavigateItem, onItemClick: (HomeNavigateItem) -> Unit) {
     Box(
         modifier = Modifier
-            .fillMaxSize()
+            .height(160.dp)
+            .width(160.dp)
             .padding(8.dp)
             .background(
                 color = Color.White,
@@ -39,23 +47,38 @@ fun HomeItemView(homeNavigateItem: HomeNavigateItem, onItemClick: (HomeNavigateI
             .clickable {
                 onItemClick(homeNavigateItem)
             }
-            .height(108.dp)
     ) {
-        Column(modifier = Modifier.align(Alignment.Center)) {
+        Column(
+            modifier = Modifier
+                .align(Alignment.Center)
+        ) {
             Image(
-                modifier = Modifier.align(CenterHorizontally),
+                modifier = Modifier
+                    .align(CenterHorizontally)
+                    .size(64.dp),
                 painter = painterResource(homeNavigateItem.icon),
                 contentDescription = null
             )
 
             Text(
-                modifier = Modifier.align(CenterHorizontally),
-                text = homeNavigateItem.navigate
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .padding(horizontal = 8.dp)
+                    .align(CenterHorizontally),
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                text = homeNavigateItem.name,
+                maxLines = 1
             )
 
             Text(
-                modifier = Modifier.align(CenterHorizontally),
-                text = homeNavigateItem.navigate
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .align(CenterHorizontally)
+                    .padding(horizontal = 8.dp),
+                fontSize = 14.sp,
+                text = homeNavigateItem.desc,
+                maxLines = 2
             )
         }
 
@@ -68,10 +91,11 @@ fun preHomeItemView() {
     HomeItemView(
         HomeNavigateItem(
             R.mipmap.ic_logo,
-            "你好",
-            "你好"
+            "你好你好你好你好你好",
+            "你好你好你好你好你好你好你好",
+            "你好你好你好你好你好你好",
         )
-    ){
+    ) {
 
     }
 }

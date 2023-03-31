@@ -66,7 +66,7 @@ fun HomeNavigate() {
 fun NavGraphBuilder.baseGraph(navController: NavController) {
     navigation(startDestination = "a", route = "b") {
         composable(
-            route = BASE_NAVIGATION_TEXT
+            route = HOME_NAVIGATION_BASE
         ) {
             BaseTextPage {
                 navController.popBackStack()
