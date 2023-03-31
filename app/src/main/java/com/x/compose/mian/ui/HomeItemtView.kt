@@ -52,6 +52,11 @@ fun HomeItemView(homeNavigateItem: HomeNavigateItem, onItemClick: (HomeNavigateI
                 modifier = Modifier.align(CenterHorizontally),
                 text = homeNavigateItem.navigate
             )
+
+            Text(
+                modifier = Modifier.align(CenterHorizontally),
+                text = homeNavigateItem.navigate
+            )
         }
 
     }
@@ -62,7 +67,7 @@ fun HomeItemView(homeNavigateItem: HomeNavigateItem, onItemClick: (HomeNavigateI
 fun preHomeItemView() {
     HomeItemView(
         HomeNavigateItem(
-            R.mipmap.ic_launcher,
+            R.mipmap.ic_logo,
             "你好",
             "你好"
         )

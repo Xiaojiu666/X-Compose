@@ -21,9 +21,12 @@ class MainActivity : AppCompatActivity() {
 
 fun createHomePageNavigate(): List<HomeNavigateItem> {
     return listOf(
-        HomeNavigateItem(R.mipmap.ic_launcher, BASE_NAVIGATION_TEXT, "基础控件"),
-        HomeNavigateItem(R.mipmap.ic_launcher, "", "容器控件"),
-        HomeNavigateItem(R.mipmap.ic_launcher, "", "动画"),
+        HomeNavigateItem(
+            R.mipmap.ic_logo, BASE_NAVIGATION_TEXT, "基础控件",
+            "TextView、ImageView"
+        ),
+        HomeNavigateItem(R.mipmap.ic_logo, "", "容器控件"),
+        HomeNavigateItem(R.mipmap.ic_logo, "", "动画"),
     )
 }
 

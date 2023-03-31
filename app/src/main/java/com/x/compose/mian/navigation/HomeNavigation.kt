@@ -10,11 +10,14 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
 import androidx.compose.animation.slideIn
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.TransformOrigin
 import androidx.compose.ui.unit.IntSize
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
+import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.navigation
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
@@ -28,33 +31,22 @@ import com.x.compose.text.baseText
 @Composable
 fun HomeNavigate() {
     val navController = rememberAnimatedNavController()
+    //https://zhuanlan.zhihu.com/p/408075436
     AnimatedNavHost(
         navController = navController,
         startDestination = HOME_NAVIGATION,
-        enterTransition = { EnterTransition.None },
-        exitTransition = { ExitTransition.None }
-//        enterTransition = {
-//            slideIntoContainer(
-//                AnimatedContentScope.SlideDirection.Left,
-//                animationSpec = tween(300)
-//            )
-//            scaleIn(
-//                animationSpec = tween(700),
-//                initialScale = 0.2f,
-//                transformOrigin = TransformOrigin(0.2f, 0.2f)
-//            )
-//        },
-//        exitTransition = {
-//            slideOutOfContainer(
-//                AnimatedContentScope.SlideDirection.Right,
-//                animationSpec = tween(300)
-//            )
-//            scaleOut(
-//                animationSpec = tween(700),
-//                targetScale = 0.2f,
-//                transformOrigin = TransformOrigin(0.2f, 0.2f)
-//            )
-//        }
+        enterTransition = {
+            slideInHorizontally(initialOffsetX = { it })
+        },
+        exitTransition = {
+            slideOutHorizontally(targetOffsetX = { -it })
+        },
+        popEnterTransition = {
+            EnterTransition.None
+        },
+        popExitTransition = {
+            ExitTransition.None
+        }
     ) {
         navigation(startDestination = HOME_NAVIGATION_DEFAULT, route = HOME_NAVIGATION) {
             composable(
@@ -84,7 +76,7 @@ fun NavGraphBuilder.baseGraph(navController: NavController) {
 }
 
 
-fun NavGraphBuilder.animationGraph(navController: NavController) {
+fun NavGraphBuilder.animationViewGraph(navController: NavController) {
     navigation(startDestination = "username", route = "login") {
 
     }
