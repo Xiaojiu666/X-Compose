@@ -1,7 +1,4 @@
-package com.x.compose.mian.theme
-
-import androidx.compose.ui.text.font.*
-import com.x.compose.R
+package com.x.compose.main.theme
 
 //val italic =
 //    Font(resId = R.font.daimler_cac_regular, weight = FontWeight.Normal, style = FontStyle.Italic)

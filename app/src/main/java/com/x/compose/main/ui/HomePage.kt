@@ -1,4 +1,4 @@
-package com.x.compose.mian.ui
+package com.x.compose.main.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -11,10 +11,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import com.x.compose.HomeNavigateItem
 import com.x.compose.R
-import com.x.compose.mian.ui.base.BaseScaffoldPage
-
+import com.x.compose.data.HomeNavigateItem
+import com.x.compose.main.ui.base.BaseScaffoldPage
 
 @Composable
 fun HomePageView(
@@ -30,7 +29,7 @@ fun HomePageView(
             LazyVerticalGrid(
                 columns = GridCells.Fixed(count = 2)
             ) {
-                items(homeItem) {
+                items(homeItem){
                     HomeItemView(it) {
                         onItemClick(it)
                     }

@@ -1,4 +1,4 @@
-package com.x.compose.mian.ui
+package com.x.compose.main.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -14,7 +14,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mercedesbenz.core_ui.theme.subtitle2Bold
-import com.x.compose.mian.theme.baseWhite
+import com.x.compose.main.theme.baseWhite
 
 
 val TOOLBAR_HEIGHT = 56.dp

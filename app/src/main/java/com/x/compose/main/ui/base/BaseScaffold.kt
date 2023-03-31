@@ -1,4 +1,4 @@
-package com.x.compose.mian.ui.base
+package com.x.compose.main.ui.base
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -7,7 +7,6 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.x.compose.mian.ui.BaseTitleToolbar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

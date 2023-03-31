@@ -9,8 +9,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import com.x.compose.R
-import com.x.compose.mian.ui.BaseBackToolbar
-import com.x.compose.mian.ui.base.BaseScaffoldPage
+import com.x.compose.main.ui.BaseBackToolbar
+import com.x.compose.main.ui.base.BaseScaffoldPage
 
 @Composable
 fun BaseTextPage(onBackClick: () -> Unit) {

@@ -1,4 +1,4 @@
-package com.x.compose.mian.navigation
+package com.x.compose.main.navigation
 
 const val HOME_NAVIGATION  = "home"
 

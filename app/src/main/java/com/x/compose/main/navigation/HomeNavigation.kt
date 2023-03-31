@@ -1,31 +1,21 @@
-package com.x.compose.mian.navigation
+package com.x.compose.main.navigation
 
-import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.scaleIn
-import androidx.compose.animation.scaleOut
-import androidx.compose.animation.slideIn
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.TransformOrigin
-import androidx.compose.ui.unit.IntSize
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
-import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.navigation
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
-import com.x.compose.mian.ui.HomePageView
-import com.x.compose.createHomePageNavigate
+import com.x.compose.base.BasePageRoute
+import com.x.compose.data.createHomePageNavigate
+import com.x.compose.main.ui.HomePageView
 import com.x.compose.text.BaseTextPage
-import com.x.compose.text.baseText
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
@@ -68,9 +58,12 @@ fun NavGraphBuilder.baseGraph(navController: NavController) {
         composable(
             route = HOME_NAVIGATION_BASE
         ) {
-            BaseTextPage {
-                navController.popBackStack()
+            BasePageRoute(baseItem = createHomePageNavigate()) {
+                navController.navigate(it.navigate)
             }
+//            BaseTextPage {
+//                navController.popBackStack()
+//            }
         }
     }
 }
