@@ -13,6 +13,7 @@ import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.x.compose.base.BasePageRoute
+import com.x.compose.container.TagView
 import com.x.compose.data.createHomePageNavigate
 import com.x.compose.main.ui.HomePageView
 import com.x.compose.text.BaseTextPage
@@ -38,9 +39,9 @@ fun HomeNavigate() {
             ExitTransition.None
         }
     ) {
-        navigation(startDestination = HOME_NAVIGATION_DEFAULT, route = HOME_NAVIGATION) {
+        navigation(startDestination = HOME_NAVIGATION_START, route = HOME_NAVIGATION) {
             composable(
-                HOME_NAVIGATION_DEFAULT
+                HOME_NAVIGATION_START
             ) {
                 HomePageView(homeItem = createHomePageNavigate()) {
                     navController.navigate(it.navigate)
@@ -61,9 +62,9 @@ fun NavGraphBuilder.baseGraph(navController: NavController) {
             BasePageRoute(baseItem = createHomePageNavigate()) {
                 navController.navigate(it.navigate)
             }
-//            BaseTextPage {
-//                navController.popBackStack()
-//            }
+            BaseTextPage {
+                navController.popBackStack()
+            }
         }
     }
 }
