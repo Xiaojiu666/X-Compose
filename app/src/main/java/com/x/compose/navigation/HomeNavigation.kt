@@ -1,4 +1,4 @@
-package com.x.compose.main.navigation
+package com.x.compose.navigation
 
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
@@ -12,11 +12,17 @@ import androidx.navigation.compose.navigation
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
-import com.x.compose.base.BasePageRoute
-import com.x.compose.container.TagView
+import com.x.compose.base.ui.BasePageRoute
 import com.x.compose.data.createHomePageNavigate
-import com.x.compose.main.ui.HomePageView
+import com.x.compose.home.HomePage
 import com.x.compose.text.BaseTextPage
+
+
+const val HOME_NAVIGATION  = "home"
+
+const val HOME_NAVIGATION_START  = "home/start"
+
+const val HOME_NAVIGATION_BASE  = "home/base"
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
@@ -43,7 +49,7 @@ fun HomeNavigate() {
             composable(
                 HOME_NAVIGATION_START
             ) {
-                HomePageView(homeItem = createHomePageNavigate()) {
+                HomePage(homeItem = createHomePageNavigate()) {
                     navController.navigate(it.navigate)
                 }
             }

@@ -1,4 +1,4 @@
-package com.x.compose.base
+package com.x.compose.base.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.height

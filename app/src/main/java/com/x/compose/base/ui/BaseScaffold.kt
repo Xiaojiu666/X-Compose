@@ -1,4 +1,4 @@
-package com.x.compose.main.ui.base
+package com.x.compose.base.ui
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,11 +11,12 @@ import androidx.compose.ui.Modifier
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BaseScaffoldPage(
+    modifier: Modifier = Modifier,
     toolbar: @Composable () -> Unit,
     content: @Composable (PaddingValues) -> Unit
 ) {
     Scaffold(
-        modifier = Modifier
+        modifier = modifier
             .navigationBarsPadding()
             .fillMaxSize(),
         topBar = toolbar

@@ -1,6 +1,5 @@
-package com.x.compose.main.ui
+package com.x.compose.home
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,23 +13,25 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import com.x.compose.R
 import com.x.compose.data.HomeNavigateItem
-import com.x.compose.main.ui.base.BaseScaffoldPage
+import com.x.compose.base.ui.BaseTitleToolbar
+import com.x.compose.base.ui.BaseScaffoldPage
+import com.x.compose.theme.colorBackground
 
 @Composable
-fun HomePageView(
+fun HomePage(
     homeItem: List<HomeNavigateItem>, onItemClick: (HomeNavigateItem) -> Unit
 ) {
     BaseScaffoldPage(toolbar = { BaseTitleToolbar(title = stringResource(id = R.string.app_name)) }) {
         Box(
             modifier = Modifier
-                .background(Color.DarkGray)
+                .background(colorBackground())
                 .padding(it)
                 .fillMaxSize()
         ) {
             LazyVerticalGrid(
                 columns = GridCells.Fixed(count = 2)
             ) {
-                items(homeItem){
+                items(homeItem) {
                     HomeItemView(it) {
                         onItemClick(it)
                     }

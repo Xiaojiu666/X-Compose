@@ -1,7 +1,7 @@
 package com.x.compose.data
 
 import com.x.compose.R
-import com.x.compose.main.navigation.HOME_NAVIGATION_BASE
+import com.x.compose.navigation.HOME_NAVIGATION_BASE
 
 
 data class HomeNavigateItem(
@@ -12,42 +12,26 @@ fun createHomePageNavigate(): List<HomeNavigateItem> {
     return listOf(
         HomeNavigateItem(
             R.mipmap.ic_logo, HOME_NAVIGATION_BASE,
-            "基础控件",
-            "TextView,ImageView,EditText"
+            "文字",
+            "TextView,EditText"
         ),
         HomeNavigateItem(
             R.mipmap.ic_logo,
             HOME_NAVIGATION_BASE,
-            "容器控件",
-            "Column、Row、Box、List"
+            "图片和图形",
+            "ImageView"
         ),
         HomeNavigateItem(
             R.mipmap.ic_logo,
             HOME_NAVIGATION_BASE,
-            "动画效果",
-            "TextView、ImageView、EditText"
-        ),
-    )
-}
-
-fun createBasePageNavigate(): List<HomeNavigateItem> {
-    return listOf(
-        HomeNavigateItem(
-            R.mipmap.ic_logo, HOME_NAVIGATION_BASE,
-            "Text",
-            "一些文本样式"
+            "动画",
+            "各种炫酷的动画"
         ),
         HomeNavigateItem(
             R.mipmap.ic_logo,
             HOME_NAVIGATION_BASE,
-            "Image",
-            "一些Image样式"
-        ),
-        HomeNavigateItem(
-            R.mipmap.ic_logo,
-            HOME_NAVIGATION_BASE,
-            "EditText",
-            "一些EditText样式"
+            "轻触和输入",
+            "手势滑动、拖拽"
         ),
     )
 }
