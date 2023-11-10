@@ -16,13 +16,22 @@ import com.x.compose.base.ui.BasePageRoute
 import com.x.compose.data.createHomePageNavigate
 import com.x.compose.home.HomePage
 import com.x.compose.text.BaseTextPage
+import com.x.compose.textfiled.TextFieldPage
 
 
-const val HOME_NAVIGATION  = "home"
+const val HOME_NAVIGATION = "home"
 
-const val HOME_NAVIGATION_START  = "home/start"
+const val HOME_NAVIGATION_START = "home/start"
 
-const val HOME_NAVIGATION_BASE  = "home/base"
+const val NAV_HOME_TEXT = "home/text"
+
+const val NAV_HOME_TEXT_FIELD = "home/text/field"
+
+const val NAV_HOME_IMAGE = "home/text/field"
+
+const val NAV_HOME_ANIMATED = "home/text/animate"
+
+const val NAV_HOME_GUEST = "home/text/guest"
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
@@ -63,12 +72,17 @@ fun HomeNavigate() {
 fun NavGraphBuilder.baseGraph(navController: NavController) {
     navigation(startDestination = "a", route = "b") {
         composable(
-            route = HOME_NAVIGATION_BASE
+            route = NAV_HOME_TEXT
         ) {
-            BasePageRoute(baseItem = createHomePageNavigate()) {
-                navController.navigate(it.navigate)
-            }
             BaseTextPage {
+                navController.popBackStack()
+            }
+        }
+
+        composable(
+            route = NAV_HOME_TEXT_FIELD
+        ) {
+            TextFieldPage {
                 navController.popBackStack()
             }
         }
