@@ -3,6 +3,7 @@ package com.x.compose.home
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
@@ -26,6 +27,7 @@ fun HomeItemView(homeNavigateItem: HomeNavigateItem, onItemClick: (HomeNavigateI
     Column(
         modifier = Modifier
             .padding(8.dp)
+            .fillMaxWidth()
             .background(colorSecondary(), RoundedCornerShape(5.dp))
             .padding(12.dp)
             .clickable {

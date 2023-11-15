@@ -4,6 +4,8 @@ import com.x.compose.R
 import com.x.compose.navigation.NAV_HOME_ANIMATED
 import com.x.compose.navigation.NAV_HOME_GUEST
 import com.x.compose.navigation.NAV_HOME_IMAGE
+import com.x.compose.navigation.NAV_HOME_IMAGE_CUSTOM
+import com.x.compose.navigation.NAV_HOME_IMAGE_VIEW
 import com.x.compose.navigation.NAV_HOME_TEXT
 import com.x.compose.navigation.NAV_HOME_TEXT_FIELD
 
@@ -28,9 +30,15 @@ fun createHomePageNavigate(): List<HomeNavigateItem> {
         ),
         HomeNavigateItem(
             R.mipmap.ic_logo,
-            NAV_HOME_IMAGE,
-            "图片和图形",
-            "ImageView"
+            NAV_HOME_IMAGE_VIEW,
+            "图片",
+            "ImageView、AsyncImageView"
+        ),
+        HomeNavigateItem(
+            R.mipmap.ic_logo,
+            NAV_HOME_IMAGE_CUSTOM,
+            "Canvas",
+            "Canvas 画布"
         ),
         HomeNavigateItem(
             R.mipmap.ic_logo,

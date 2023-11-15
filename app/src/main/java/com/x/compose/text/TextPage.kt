@@ -22,6 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -36,7 +37,9 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
@@ -112,6 +115,7 @@ fun itemContainer(title: String, content: @Composable ColumnScope.() -> Unit) {
             .background(colorSecondary(), RoundedCornerShape(5.dp))
             .padding(8.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(text = title, style = subtitle1Bold)
         content()
@@ -205,5 +209,11 @@ fun SelectableText(content: String) {
 
 @Composable
 fun TextFontFamily(content: String) {
-    Text(content, fontFamily = FontFamily.SansSerif)
+    Text(
+        content, fontFamily = FontFamily(
+            Font(
+                resId = R.font.number, weight = FontWeight.Bold, style = FontStyle.Italic
+            )
+        ), fontSize = 16.sp
+    )
 }

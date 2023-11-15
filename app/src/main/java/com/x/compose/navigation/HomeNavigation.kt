@@ -12,9 +12,10 @@ import androidx.navigation.compose.navigation
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
-import com.x.compose.base.ui.BasePageRoute
+import com.x.compose.canvas.CanvasPage
 import com.x.compose.data.createHomePageNavigate
 import com.x.compose.home.HomePage
+import com.x.compose.image.ImagePage
 import com.x.compose.text.BaseTextPage
 import com.x.compose.textfiled.TextFieldPage
 
@@ -27,7 +28,11 @@ const val NAV_HOME_TEXT = "home/text"
 
 const val NAV_HOME_TEXT_FIELD = "home/text/field"
 
-const val NAV_HOME_IMAGE = "home/text/field"
+const val NAV_HOME_IMAGE = "home/image/image"
+
+const val NAV_HOME_IMAGE_VIEW = "home/image/imageview"
+
+const val NAV_HOME_IMAGE_CUSTOM = "home/image/custom"
 
 const val NAV_HOME_ANIMATED = "home/text/animate"
 
@@ -83,6 +88,31 @@ fun NavGraphBuilder.baseGraph(navController: NavController) {
             route = NAV_HOME_TEXT_FIELD
         ) {
             TextFieldPage {
+                navController.popBackStack()
+            }
+        }
+
+
+        composable(
+            route = NAV_HOME_TEXT_FIELD
+        ) {
+            TextFieldPage {
+                navController.popBackStack()
+            }
+        }
+
+        composable(
+            route = NAV_HOME_IMAGE_VIEW
+        ) {
+            ImagePage {
+                navController.popBackStack()
+            }
+        }
+
+        composable(
+            route = NAV_HOME_IMAGE_CUSTOM
+        ) {
+            CanvasPage {
                 navController.popBackStack()
             }
         }
