@@ -8,14 +8,20 @@ import androidx.compose.foundation.gestures.awaitEachGesture
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material.DrawerState
+import androidx.compose.material.DrawerValue
 import androidx.compose.material.Text
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.Saver
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.DrawModifier
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
@@ -30,6 +36,7 @@ import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.StrokeJoin
 import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.graphics.drawscope.ContentDrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.input.pointer.PointerEventType.Companion.Move
@@ -53,21 +60,6 @@ fun LottoPage(onBackClick: () -> Unit) {
     }) {
         var linePath by remember { mutableStateOf(Offset.Zero) }
         val path by remember { mutableStateOf(Path()) }
-        val paint by remember {
-            mutableStateOf(Paint().apply {
-                alpha = 0f
-                style = PaintingStyle.Stroke
-                strokeWidth = 70f
-                blendMode = BlendMode.SrcIn
-                strokeJoin = StrokeJoin.Round
-                strokeCap = StrokeCap.Round
-            })
-        }
-        var canvas: Canvas? = null
-        var bitmap: ImageBitmap? = null
-        val paintBg = Paint().apply {
-            color = Color.Gray
-        }
         Column(modifier = Modifier
             .fillMaxWidth()
             .pointerInput("dragging") {
@@ -90,28 +82,8 @@ fun LottoPage(onBackClick: () -> Unit) {
                     }
                 }
             }
-            .onSizeChanged {
-                bitmap = Bitmap
-                    .createBitmap(it.width, it.height, Bitmap.Config.ARGB_8888)
-                    .asImageBitmap()
-                canvas = Canvas(bitmap!!)
-            }
-            .drawWithContent {
-                drawContent()
-                drawImage(
-                    image = bitmap!!,
-                )
-                canvas!!.drawRect(
-                    Rect(
-                        0f,
-                        0f,
-                        bitmap!!.width.toFloat(),
-                        bitmap!!.height.toFloat()
-                    ), paintBg
-                )
-                path.lineTo(linePath.x, linePath.y)
-                canvas!!.drawPath(path, paint)
-            }) {
+            .scrapeLayer(path, linePath)
+        ) {
             Image(
                 modifier = Modifier.fillMaxWidth(),
                 painter = painterResource(id = R.mipmap.cat),
@@ -121,3 +93,37 @@ fun LottoPage(onBackClick: () -> Unit) {
         }
     }
 }
+
+fun Modifier.scrapeLayer(startPath: Path, moveOffset: Offset) =
+    this.then(ScrapeLayer(startPath, moveOffset))
+
+class ScrapeLayer(private val startPath: Path, private val moveOffset: Offset) : DrawModifier {
+
+    private val pathPaint = Paint().apply {
+        alpha = 0f
+        style = PaintingStyle.Stroke
+        strokeWidth = 70f
+        blendMode = BlendMode.SrcIn
+        strokeJoin = StrokeJoin.Round
+        strokeCap = StrokeCap.Round
+    }
+
+    private val layerPaint = Paint().apply {
+        color = Color.Gray
+    }
+
+    override fun ContentDrawScope.draw() {
+        drawIntoCanvas {
+            drawContent()
+            val rect = Rect(0f, 0f, size.width, size.height)
+            //从当前画布，裁切一个新的图层
+            it.saveLayer(rect, layerPaint)
+            it.drawRect(rect, layerPaint)
+            startPath.lineTo(moveOffset.x, moveOffset.y)
+            it.drawPath(startPath, pathPaint)
+            it.restore()
+        }
+    }
+}
+
+
