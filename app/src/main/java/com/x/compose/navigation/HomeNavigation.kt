@@ -13,6 +13,9 @@ import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.x.compose.canvas.CanvasPage
+import com.x.compose.customize.CustomizePage
+import com.x.compose.customize.lotto.LottoPage
+import com.x.compose.data.createCustomizePageNavigate
 import com.x.compose.data.createHomePageNavigate
 import com.x.compose.home.HomePage
 import com.x.compose.image.ImagePage
@@ -37,6 +40,10 @@ const val NAV_HOME_IMAGE_CUSTOM = "home/image/custom"
 const val NAV_HOME_ANIMATED = "home/text/animate"
 
 const val NAV_HOME_GUEST = "home/text/guest"
+
+const val NAV_HOME_CUSTOMIZE = "home/customize"
+
+const val NAV_HOME_CUSTOMIZE_LOTTO = "home/customize/lotto"
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
@@ -68,6 +75,8 @@ fun HomeNavigate() {
                 }
             }
             baseGraph(navController)
+
+            customize(navController)
         }
     }
 }
@@ -120,8 +129,25 @@ fun NavGraphBuilder.baseGraph(navController: NavController) {
 }
 
 
-fun NavGraphBuilder.animationViewGraph(navController: NavController) {
+@OptIn(ExperimentalAnimationApi::class)
+fun NavGraphBuilder.customize(navController: NavController) {
     navigation(startDestination = "username", route = "login") {
+        composable(
+            route = NAV_HOME_CUSTOMIZE
+        ) {
+            CustomizePage(createCustomizePageNavigate(), onItemClick = {
+                navController.navigate(it.navigate)
+            }) {
+                navController.popBackStack()
+            }
+        }
 
+        composable(
+            route = NAV_HOME_CUSTOMIZE_LOTTO
+        ) {
+            LottoPage {
+                navController.popBackStack()
+            }
+        }
     }
 }

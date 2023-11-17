@@ -2,6 +2,8 @@ package com.x.compose.data
 
 import com.x.compose.R
 import com.x.compose.navigation.NAV_HOME_ANIMATED
+import com.x.compose.navigation.NAV_HOME_CUSTOMIZE
+import com.x.compose.navigation.NAV_HOME_CUSTOMIZE_LOTTO
 import com.x.compose.navigation.NAV_HOME_GUEST
 import com.x.compose.navigation.NAV_HOME_IMAGE
 import com.x.compose.navigation.NAV_HOME_IMAGE_CUSTOM
@@ -51,6 +53,24 @@ fun createHomePageNavigate(): List<HomeNavigateItem> {
             NAV_HOME_GUEST,
             "轻触和输入",
             "手势滑动、拖拽"
+        ),
+        HomeNavigateItem(
+            R.mipmap.ic_logo,
+            NAV_HOME_CUSTOMIZE,
+            "自定义布局",
+            "一些脑洞大开的自定义布局"
+        ),
+    )
+}
+
+
+fun createCustomizePageNavigate(): List<HomeNavigateItem> {
+    return listOf(
+        HomeNavigateItem(
+            R.mipmap.ic_logo,
+            NAV_HOME_CUSTOMIZE_LOTTO,
+            "刮刮乐",
+            "沉迷于刮刮乐，自定义图层，仿刮刮乐"
         ),
     )
 }
