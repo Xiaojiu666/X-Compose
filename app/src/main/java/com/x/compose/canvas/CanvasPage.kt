@@ -13,13 +13,16 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.draw.drawWithContent
+import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Brush
@@ -162,44 +165,6 @@ fun CanvasPage(onBackClick: () -> Unit) {
                 }
             }
 
-            item {
-                var pointerOffset by remember {
-                    mutableStateOf(Offset(0f, 0f))
-                }
-                itemContainer("drawWithContent") {
-                    Image(
-                        painter = painterResource(id = R.mipmap.cat),
-                        contentDescription = "",
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .pointerInput("dragging") {
-                                detectDragGestures { change, dragAmount ->
-                                    pointerOffset += dragAmount
-                                }
-                            }
-                            .onSizeChanged {
-                                pointerOffset = Offset(it.width / 2f, it.height / 2f)
-                            }
-                            .drawWithContent {
-                                drawContent()
-                                // draws a fully black area with a small keyhole at pointerOffset that’ll show part of the UI.
-                                drawRect(
-                                    brush = Brush.verticalGradient(
-                                        colors = listOf(
-                                            Color.Black,
-                                            Color.Red,
-                                            Color.Yellow,
-                                            Color.Blue,
-                                            Color.Green,
-                                            Color.Cyan
-                                        ), startY = pointerOffset.y ,
-                                    ),
-                                    blendMode = BlendMode.Overlay
-                                )
-                            }
-                    )
-                }
-            }
 
             item {
                 var pointerOffset by remember {
@@ -235,6 +200,24 @@ fun CanvasPage(onBackClick: () -> Unit) {
                             contentDescription = ""
                         )
                     }
+                }
+
+
+            }
+
+            item {
+                itemContainer("drawBehind") {
+                    Text(
+                        "Hello Compose!",
+                        modifier = Modifier
+                            .drawBehind {
+                                drawRoundRect(
+                                    Color(0xFFBBAAEE),
+                                    cornerRadius = CornerRadius(10.dp.toPx())
+                                )
+                            }
+                            .padding(4.dp)
+                    )
                 }
             }
         }

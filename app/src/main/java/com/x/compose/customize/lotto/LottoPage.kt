@@ -113,8 +113,8 @@ class ScrapeLayer(private val startPath: Path, private val moveOffset: Offset) :
     }
 
     override fun ContentDrawScope.draw() {
+        drawContent()
         drawIntoCanvas {
-            drawContent()
             val rect = Rect(0f, 0f, size.width, size.height)
             //从当前画布，裁切一个新的图层
             it.saveLayer(rect, layerPaint)

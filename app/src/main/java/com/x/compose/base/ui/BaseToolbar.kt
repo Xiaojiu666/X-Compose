@@ -14,6 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.x.compose.R
 import com.x.compose.theme.colorPrimary
+import com.x.compose.theme.colorSecondary
 import com.x.compose.theme.colorTertiary
 import com.x.compose.theme.subtitle2Bold
 
@@ -84,7 +85,7 @@ fun BaseBackToolbar(
                 text = title,
                 textAlign = TextAlign.Center,
                 style = subtitle2Bold,
-                color = colorPrimary()
+                color = colorSecondary()
             )
         }, leftView = {
             Image(
