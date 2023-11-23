@@ -38,6 +38,13 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.4.2"
     }
+    sourceSets {
+        main {
+            assets {
+                srcDirs 'src\\main\\assets'
+            }
+        }
+    }
 }
 
 dependencies {
