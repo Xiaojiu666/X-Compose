@@ -31,6 +31,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.ImageLoader
 import coil.compose.AsyncImage
 import coil.imageLoader
 import coil.request.ImageRequest
@@ -75,9 +76,22 @@ fun ImagePage(onBackClick: () -> Unit) {
                 val context = LocalContext.current
                 itemContainer("Coil AsyncImage") {
                     AsyncImage(
+                        model = "http://59.110.154.87:9000/comic/1/0.jpg",
+                        contentDescription = "Translated description of what the image contains"
+                    )
+
+                    AsyncImage(
+                        model = "http://59.110.154.87:9000/comic/1/0.jpg",
+                        contentDescription = "Translated description of what the image contains"
+                    )
+                    AsyncImage(
                         modifier = Modifier.size(64.dp),
                         model = ImageRequest.Builder(LocalContext.current)
-                            .data("https://www.baidu.com/img/flexible/logo/pc/result.png")
+                            .data("http://59.110.154.87:9000/comic/1/0.jpg").listener(
+                                onError = { request, result ->
+                                    println("onError request ${request.error} result ${result.throwable}")
+                                }
+                            )
                             .placeholder(R.drawable.baseline_downloading_24)
                             .build(),
                         contentDescription = "",
